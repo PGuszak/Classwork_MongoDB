@@ -1,3 +1,5 @@
+"use strict";
+
 var courses = [ //later will be in the DB
     {
         title: "Raspberry Cake",
@@ -13,19 +15,19 @@ var courses = [ //later will be in the DB
     },
 ]
 
-//made templates for routes 
-exports.showCourses = (req, res) => {
-    res.render("courses", {offeredCourses: courses});
+module.exports = {
+    index: (req, res) => {
+        res.render("home"); //main page this is the index.ejs but renamed cause I hate my life 
+    },
+    contact: (req,res) => {
+        res.render("contact");
+    },
+    courses: (req, res) => {
+        res.render("courses");
+    }
 }
 
-exports.showSignUp = (req, res) => {
-    res.render("contact"); 
-}
 
-exports.postedSignUpForm = (req, res) => {
-    res.render("thanks");
-}
-
-exports.showHome = (req, res) => {
+/*exports.showHome = (req, res) => {
     res.render("home"); //loads the ejs file with this name
-}
+}*/

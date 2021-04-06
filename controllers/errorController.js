@@ -9,6 +9,6 @@ exports.pageNotFoundError = (req, res) => {
 exports.internalServererror = (error, req, res, next) => {
     let errorCode = httpStatus.INTERNAL_SERVER_ERROR;
     res.status(errorCode);
-    res.send(`$(errorCode), Sorry! Something went wrong with your application`);
+    res.send(`${errorCode}, Sorry! Something went wrong with your application`);
     console.error(error.stack); //see error from stack
 }

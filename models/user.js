@@ -28,22 +28,31 @@ userSchema = new Schema(
             type: String,
             required: true
         },
-        courses: [{type: Schema.Types.ObjectId, ref: Course}],
-        subscribedAccount: {type: Schema.Types.ObjectId, ref: Subscriber}
+        courses: [
+            {
+                type: Schema.Types.ObjectId, 
+                ref: "Course"
+            }
+        ],
+        subscribedAccount: {
+            type: Schema.Types.ObjectId,
+            ref: "Subscriber"
+        }
     },
     {
         timestamps: true
     }
 )
 
+//hook
 userSchema.virtual("fullName").get(function () {
     return `${this.name.first} ${this.name.last}`;
 });
 
 //if emails are same use prehooks to link useing emails
-userSchema.pre("same", function (next) {
+userSchema.pre("save", function (next) {
     let user = this;
-    if(user.subscribedAccount == undefined) {
+    if(user.subscribedAccount === undefined) {
         Subscriber.findOne({
             email: user.email
         })
@@ -59,7 +68,7 @@ userSchema.pre("same", function (next) {
     else{
         next();
     }
-})
+});
 
 module.exports = mongoose.model("User", userSchema);
                                 //name , schema used

@@ -1,9 +1,13 @@
 <h2 class="center">User Table</h2>
+<a href="/users/new"> 
+    <span class="button">Create User</span>
+</a>
 <table class ="table">
     <thead>
         <tr>
             <th>Name</th>
             <th>Email</th>
+            <th>Zip Code</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -12,9 +16,8 @@
         <% users.forEach(user => { %>
             <tr>
                 <td>
-                    <a href="<%= `/user/$user._id` %>">
-                        <%= user.name %>
-                    </a>
+                        <%= user.name.first %>     
+                        <%= user.name.last %>     
                 </td>
                 <td>
                     <%= user.email %>
@@ -23,7 +26,7 @@
                     <%= user.zipCode %>
                 </td>
                 <td>
-                    <a href="<%= `/user/${user._id}/edit` %>">
+                    <a href="<%= `/users/${user._id}/edit` %>">
                         Edit
                     </a>
                 </td>

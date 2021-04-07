@@ -17,7 +17,7 @@ const mongoose = require("mongoose"),
             min: [10000, "Zip code is too short"],
             max: 99999
         },
-        //courses: [{ type: mongoose.Schema.Types.ObjectId, ref: Course }],
+        courses: [{type: mongoose.Schema.Types.ObjectId, ref: "Course"}]
     },
     {
         timestamps: true

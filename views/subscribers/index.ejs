@@ -4,6 +4,7 @@
         <tr>
             <th>Name</th>
             <th>Email</th>
+            <th>Zip Code</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -12,7 +13,7 @@
         <% subscribers.forEach(subscriber=> { %>
             <tr>
                 <td>
-                    <a href="<%= `/subscriber/$subscriber.id` %> ">
+                    <a href="<%= `/subscriber/$subscriber._id` %> ">
                         <%= subscriber.name %>
                     </a>
                 </td>
@@ -23,12 +24,12 @@
                     <%= subscriber.zipCode %>
                 </td>
                 <td>
-                    <a href="<%= `/subscriber/${subscriber.id}/edit` %> ">
+                    <a href="<%= `subscribers/${subscriber._id}/edit` %> ">
                         Edit
                     </a>
                 </td>
                 <td>
-                    <a href="<%= `/subscribers/${subscriber.id}/delete?_method=DELETE` %>"
+                    <a href="<%= `subscribers/${subscriber._id}/delete?_method=DELETE` %>"
                         onclick="return confirm('Are you sure')">
                         Delete
                     </a>

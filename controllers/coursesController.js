@@ -27,7 +27,7 @@ module.exports = {
             maxStudents: req.body.maxStudents,
             cost: req.body.cost
         });
-        course.create(newCourse)
+        Course.create(newCourse)
         .then( course => {
             res.locals.course = course;
             res.locals.redirect = "/courses";
@@ -55,7 +55,7 @@ module.exports = {
         })
     },
     showView: (req, res) => {
-        res.render(courses/show);
+        res.render("courses/show");
     },
     edit: (req, res) => {
         let courseId = req.params.id;
@@ -70,12 +70,21 @@ module.exports = {
     },
     update: (req, res, next) => {
         let courseId = req.params.id;
+        
+        var updatedCourse = {};
+        updatedCourse.title = req.body.title;
+        updatedCourse.description = req.body.description;
+        updatedCourse.maxStudents = req.body.maxStudents;
+        updatedCourse.cost = req.body.cost;
+        
+        /*
         let updatedCourse = new Course({
             title: req.body.title,
             description: req.body.description,
             maxStudents: req.body.maxStudents,
             cost: req.body.cost
-        });
+        });*/
+
         Course.findByIdAndUpdate(courseId, updatedCourse)
         .then(course =>{
             res.locals.course = course;

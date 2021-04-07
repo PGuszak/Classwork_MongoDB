@@ -42,27 +42,25 @@ router.get("/subscribers", subscribersContoller.index, subscribersContoller.inde
 router.get("/subscribers/new", subscribersContoller.new);
 router.post("/subscribers/create", subscribersContoller.create, subscribersContoller.redirectView)
 router.get("/subscribers/:id", subscribersContoller.show, subscribersContoller.showView);
-router.get("/subscribers:id/edit", subscribersContoller.edit);
-router.put("/subscribers:id/update", subscribersContoller.update, subscribersContoller.redirectView);
+router.get("/subscribers/:id/edit", subscribersContoller.edit);
+router.put("/subscribers/:id/update", subscribersContoller.update, subscribersContoller.redirectView);
 router.delete("/subscribers/:id/delete", subscribersContoller.delete, subscribersContoller.redirectView);
-
-router.get("/courses", coursesController.index, coursesController.indexView);
-router.get("/courses/new", coursesController.new);
-router.post("/courses/create", coursesController.create, coursesController.redirectView)
-router.get("/courses/:id", coursesController.show, coursesController.showView);
-router.get("/courses:id/edit", coursesController.edit);
-router.put("/courses:id/update", coursesController.update, coursesController.redirectView);
-router.delete("/courses/:id/delete", coursesController.delete, coursesController.redirectView);
 
 router.get("/users", usersController.index, usersController.indexView);
 router.get("/users/new", usersController.new);
 router.post("/users/create", usersController.create, usersController.redirectView)
 router.get("/users/:id", usersController.show, usersController.showView);
-router.get("/users:id/edit", usersController.edit);
-router.put("/users:id/update", usersController.update, usersController.redirectView);
+router.get("/users/:id/edit", usersController.edit);
+router.put("/users/:id/update", usersController.update, usersController.redirectView);
 router.delete("/users/:id/delete", usersController.delete, usersController.redirectView);
 
-
+router.get("/courses", coursesController.index, coursesController.indexView);
+router.get("/courses/new", coursesController.new);
+router.post("/courses/create", coursesController.create, coursesController.redirectView)
+router.get("/courses/:id", coursesController.show, coursesController.showView);
+router.get("/courses/:id/edit", coursesController.edit);
+router.put("/courses/:id/update", coursesController.update, coursesController.redirectView);
+router.delete("/courses/:id/delete", coursesController.delete, coursesController.redirectView);
 router.use(errorController.pageNotFoundError);
 router.use(errorController.internalServererror);
 

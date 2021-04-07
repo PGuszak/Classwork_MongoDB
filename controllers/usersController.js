@@ -30,7 +30,7 @@ module.exports = {
             password: req.body.password,
             zipCode: req.body.zipCode
         });
-        user.create(newUser)
+        User.create(newUser)
         .then( user => {
             res.locals.user = user;
             res.locals.redirect = "/users";
@@ -58,13 +58,13 @@ module.exports = {
         })
     },
     showView: (req, res) => {
-        res.render(users/show);
+        res.render("users/show");
     },
     edit: (req, res) => {
         let userId = req.params.id;
         User.findById(userId)
         .then(user =>{
-            res.render("/users/edit", {user: user});
+            res.render("users/edit", {user: user});
         })
         .catch(error => {
             console.log(`Error fetching user by ID: ${error.message}`);
@@ -73,6 +73,22 @@ module.exports = {
     },
     update: (req, res, next) => {
         let userId = req.params.id;
+
+     
+
+        var updatedUser = {};
+        
+
+        updatedUser.name = {
+            first: req.body.firstName,
+            last: req.body.lastName
+        };
+
+        updatedUser.password = req.body.password;
+        updatedUser.email = req.body.email;
+        updatedUser.zipCode = req.body.zipCode;
+
+        /*
         let updatedUser = new User({
             name:{
                 first: req.body.first,
@@ -82,10 +98,12 @@ module.exports = {
             password: req.body.password,
             zipCode: req.body.zipCode
         });
+        */
+
         User.findByIdAndUpdate(userId, updatedUser)
         .then(user =>{
             res.locals.user = user;
-            res.locals.redirect = `/users/${user._id}`;
+            res.locals.redirect = `/users/${userId}`;
             next();
         })
         .catch(error => {

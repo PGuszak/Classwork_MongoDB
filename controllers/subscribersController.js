@@ -1,6 +1,13 @@
 "use strict";
 
-const Subscriber = require("../models/subscriber");
+const Subscriber = require("../models/subscriber"),
+getSubscriberParams = (body) => {
+    return {
+        name: body.name,
+        email: body.email,
+        zipCode: body.zipCode
+    };
+};
 
 module.exports = {
     index:(req,res,next) => {
@@ -12,7 +19,7 @@ module.exports = {
         .catch(error => {
             console.log(`Error fetching subscriber data: ${error.message}`);
             next(error);
-        })
+        });
     },
     indexView: (req, res) => {
         res.render("subscribers/index");
@@ -35,11 +42,11 @@ module.exports = {
         .catch(error => {
             console.log(`Error saving user ${error.message}`)
             next(error)
-        })
+        });
     },
     redirectView: (req, res, rext) => {
         let redirectPath = res.locals.redirect;
-        if(redirectPath != undefined) res.redirect(redirectPath);
+        if(redirectPath) res.redirect(redirectPath);
         else next();
     },
     show: (req, res, next) => {
@@ -50,17 +57,18 @@ module.exports = {
             next();
         })
         .catch(error => {
-            console.log(`Error fetching subscriber by ID: ${error.message}`);
-        })
+            console.log(`Error fetching subscriber by ID: ${error.message}`)
+        next(error);
+        });
     },
     showView: (req, res) => {
-        res.render(subscribers/show);
+        res.render("subscribers/show");
     },
     edit: (req, res) => {
         let subscriberId = req.params.id;
         Subscriber.findById(subscriberId)
         .then(subscriber =>{
-            res.render("/subscribers/edit", {subscriber: subscriber});
+            res.render("subscribers/edit", {subscriber: subscriber});
         })
         .catch(error => {
             console.log(`Error fetching subscriber by ID: ${error.message}`);
@@ -69,15 +77,22 @@ module.exports = {
     },
     update: (req, res, next) => {
         let subscriberId = req.params.id;
-        let updatedSubscriber = new Subscriber({
+
+        var updatedSubscriber = {};
+        updatedSubscriber.name = req.body.name;
+        updatedSubscriber.email = req.body.email;
+        updatedSubscriber.zipCode = req.body.zipCode;
+        
+        /*let updatedSubscriber = new Subscriber({
             name: req.body.name,
             email: req.body.email,
             zipCode: req.body.zipCode
-        });
+        });*/
+
         Subscriber.findByIdAndUpdate(subscriberId, updatedSubscriber)
         .then(subscriber =>{
             res.locals.subscriber = subscriber;
-            res.locals.redirect = `/subscribers/${subscriber._id}`;
+            res.locals.redirect = `/subscribers/${subscriberId}`;
             next();
         })
         .catch(error => {

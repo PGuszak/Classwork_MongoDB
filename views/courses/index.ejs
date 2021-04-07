@@ -1,9 +1,14 @@
 <h2 class="center">Course Table</h2>
+<a href="/courses/new"> 
+    <span class="button">Create Course</span>
+</a>
 <table class ="table">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Email</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>MaxStudents</th>
+            <th>Cost</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -16,13 +21,18 @@
                         <%= course.title %>
                     </a>
                 </td>
-
                 <td>
                     <%= course.description %>
                 </td>
+                <td>
+                    <%= course.maxStudents %>
+                </td>
+                <td>
+                    <%= course.cost %>
+                </td>
 
                 <td>
-                    <a href="<%= `/course/${course.id}/edit` %> ">
+                    <a href="<%= `/courses/${course.id}/edit` %> ">
                         Edit
                     </a>
                 </td>

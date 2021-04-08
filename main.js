@@ -35,7 +35,6 @@ app.use("/", router);
 
 router.get("/", homeController.index);
 router.get("/contact", homeController.contact);
-//something is wrong with the calls THAT HAVE TWO INPUTS
 
 //routes for actions
 router.get("/subscribers", subscribersContoller.index, subscribersContoller.indexView);

@@ -4,7 +4,7 @@ const express = require("express"),
     router = express.Router(),
     homeController = require("./controllers/homeControllers"),
     errorController = require("./controllers/errorController"),
-    subscribersContoller = require("./controllers/subscribersController"),
+    subscribersController = require("./controllers/subscribersController"),
     usersController = require("./controllers/usersController"),
     coursesController = require("./controllers/coursesController"),
     mongoose = require("mongoose"),
@@ -84,13 +84,14 @@ router.put("/users/:id/update", usersController.validate, usersController.update
 router.get("/users/:id", usersController.show, usersController.showView);
 router.delete("/users/:id/delete", usersController.delete, usersController.redirectView);
 
-router.get("/subscribers", subscribersContoller.index, subscribersContoller.indexView);
-router.get("/subscribers/new", subscribersContoller.new);
-router.post("/subscribers/create", subscribersContoller.create, subscribersContoller.redirectView);
-router.get("/subscribers/:id", subscribersContoller.show, subscribersContoller.showView);
-router.get("/subscribers/:id/edit", subscribersContoller.edit);
-router.put("/subscribers/:id/update", subscribersContoller.update, subscribersContoller.redirectView);
-router.delete("/subscribers/:id/delete", subscribersContoller.delete, subscribersContoller.redirectView);
+router.get("/subscribers", subscribersController.index, subscribersController.indexView);
+router.get("/subscribers/new", subscribersController.new);
+router.post("/subscribers/create", subscribersController.create, subscribersController.redirectView);
+router.get("/subscribers/:id", subscribersController.show, subscribersController.showView);
+router.get("/subscribers/:id/edit", subscribersController.edit);
+router.put("/subscribers/:id/update", subscribersController.update, subscribersController.redirectView);
+router.get("/subscribers/list", subscribersController.show);
+router.delete("/subscribers/:id/delete", subscribersController.delete, subscribersController.redirectView);
 
 
 router.get("/courses", coursesController.index, coursesController.indexView);

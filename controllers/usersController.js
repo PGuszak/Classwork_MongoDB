@@ -89,6 +89,8 @@ module.exports = {
     authenticate: passport.authenticate("local", {
         failureRedirect: "/users/login",
         failureFlash: "Login failed! Check your email and passsword!",
+
+        //this doesn't work
         successRedirect: "/",
         successFlash: "Logged in!"
     }),
@@ -139,7 +141,18 @@ module.exports = {
         if (req.skip) return next();
 
         let userId = req.params.id;
-        userParams = getUserParams(req.body);
+        let userParams = getUserParams(req.body);
+
+        console.log(userParams);
+        console.log(req.body);
+        
+        userParams.name = {
+            first: req.body.firstName,
+            last: req.body.lastName
+        };
+        userParams.password = req.body.password;
+        userParams.email = req.body.email;
+        userParams.zipCode = req.body.zipCode;
 
         User.findByIdAndUpdate(userId, { $set: userParams })
             .then(user => {

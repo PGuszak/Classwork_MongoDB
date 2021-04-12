@@ -90,7 +90,6 @@ router.post("/subscribers/create", subscribersController.create, subscribersCont
 router.get("/subscribers/:id", subscribersController.show, subscribersController.showView);
 router.get("/subscribers/:id/edit", subscribersController.edit);
 router.put("/subscribers/:id/update", subscribersController.update, subscribersController.redirectView);
-router.get("/subscribers/list", subscribersController.show);
 router.delete("/subscribers/:id/delete", subscribersController.delete, subscribersController.redirectView);
 
 
